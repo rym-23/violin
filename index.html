@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Atelier di Corde — Violines de Autor</title>
+<style>
+  :root{
+    --negro:#050403;
+    --negro2:#0a0807;
+    --rojo:#4a0d11;
+    --rojo-vivo:#6e1319;
+    --oro:#c6a15b;
+    --oro-claro:#e8cf96;
+    --hueso:#ece2d2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--negro);
+    color:var(--hueso);
+    font-family:"Times New Roman", Times, serif;
+  }
+  a{color:inherit;text-decoration:none;}
+
+  .corners{position:relative;}
+  .corners::before,.corners::after,
+  .corners .c3,.corners .c4{
+    content:"";position:absolute;width:44px;height:44px;
+    border:1.5px solid var(--oro);opacity:.9;z-index:3;
+  }
+  .corners::before{top:16px;left:16px;border-right:none;border-bottom:none;}
+  .corners::after{top:16px;right:16px;border-left:none;border-bottom:none;}
+  .corners .c3{bottom:16px;left:16px;border-right:none;border-top:none;}
+  .corners .c4{bottom:16px;right:16px;border-left:none;border-top:none;}
+
+  header{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:24px 60px;background:var(--negro);
+    border-bottom:1px solid rgba(198,161,91,.5);
+    position:relative;z-index:5;
+  }
+  .logo{font-size:1.55rem;letter-spacing:2px;color:var(--oro-claro);}
+  .logo span{font-style:italic;color:var(--hueso);}
+  nav a{margin:0 22px;font-size:.98rem;letter-spacing:1px;}
+  nav a{position:relative;transition:.3s;}
+  nav a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:1px;background:var(--rojo-vivo);transition:.3s;}
+  nav a:hover{color:var(--oro-claro);}
+  nav a:hover::after{width:100%;}
+  .btn{border:1px solid var(--oro);padding:9px 20px;color:var(--oro-claro);letter-spacing:1px;font-size:.92rem;}
+  .btn:hover{background:var(--oro);color:var(--negro);}
+
+  /* HERO horizontal panorámico */
+  .hero{
+    position:relative;min-height:82vh;
+    display:flex;align-items:flex-end;
+    background:
+      linear-gradient(90deg, rgba(5,4,3,.97) 20%, rgba(74,13,17,.45) 60%, rgba(5,4,3,.9)),
+      url('https://images.unsplash.com/photo-1692552950398-63feb911b8e2?fm=jpg&q=80&w=2200&auto=format&fit=crop')
+      center/cover no-repeat;
+    padding:60px;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(ellipse at 75% 30%, rgba(110,19,25,.35), transparent 55%);
+    pointer-events:none;
+  }
+  .hero-content{max-width:640px;padding-bottom:20px;position:relative;z-index:2;
+    opacity:0;animation:fadeUp 1s ease .2s forwards;}
+  .eyebrow{color:var(--oro);letter-spacing:4px;font-size:.85rem;margin-bottom:16px;text-transform:uppercase;}
+  .hero h1{font-size:4.3rem;line-height:1.08;color:var(--hueso);font-weight:400;}
+  .hero h1 em{color:var(--oro-claro);font-style:italic;}
+  .hero p{margin:22px 0 30px;font-size:1.08rem;color:#cdbca3;line-height:1.6;max-width:560px;}
+  .hero-cta{display:flex;gap:16px;}
+  .btn-fill{background:linear-gradient(135deg, var(--rojo), var(--rojo-vivo));border:1px solid var(--oro);padding:13px 28px;letter-spacing:1px;font-size:.95rem;transition:.3s;}
+  .btn-fill:hover{background:var(--rojo-vivo);animation:glowPulse 1.4s ease infinite;}
+  .btn{transition:.3s;}
+
+  section{padding:80px 60px;background:var(--negro2);position:relative;}
+  section:nth-of-type(even){background:var(--negro);}
+  section::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg, transparent, var(--rojo-vivo), var(--oro), var(--rojo-vivo), transparent);
+    opacity:.7;
+  }
+  .divider{width:60px;height:1px;background:var(--oro);margin:0 auto 18px;position:relative;}
+  .divider::after{
+    content:"";position:absolute;left:50%;top:-3px;transform:translateX(-50%);
+    width:7px;height:7px;border-radius:50%;background:var(--rojo-vivo);
+    box-shadow:0 0 8px var(--rojo-vivo);
+  }
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+  .reveal{opacity:0;animation:fadeUp .9s ease forwards;}
+  .reveal.d1{animation-delay:.1s;}
+  .reveal.d2{animation-delay:.25s;}
+  .reveal.d3{animation-delay:.4s;}
+
+  @keyframes glowPulse{
+    0%,100%{box-shadow:0 0 0 rgba(110,19,25,0);}
+    50%{box-shadow:0 0 26px rgba(110,19,25,.55);}
+  }
+
+  /* barra de progreso */
+  #progress{position:fixed;top:0;left:0;height:3px;background:linear-gradient(90deg,var(--rojo-vivo),var(--oro));width:0%;z-index:999;transition:width .1s ease;}
+
+  /* particulas doradas flotantes */
+  .particles{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:1;}
+  .particle{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;background:var(--oro-claro);opacity:.7;animation:floatUp linear infinite;box-shadow:0 0 6px var(--oro);}
+  @keyframes floatUp{
+    0%{transform:translateY(0) translateX(0);opacity:0;}
+    10%{opacity:.8;}
+    90%{opacity:.5;}
+    100%{transform:translateY(-100vh) translateX(20px);opacity:0;}
+  }
+
+  /* eyebrow con punto pulsante */
+  .eyebrow{display:flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--rojo-vivo);box-shadow:0 0 8px var(--rojo-vivo);animation:blink 1.6s ease infinite;}
+  @keyframes blink{0%,100%{opacity:1;}50%{opacity:.25;}}
+
+  /* titulo con letras apareciendo */
+  .hero h1 .word{display:inline-block;opacity:0;transform:translateY(20px);animation:wordUp .7s ease forwards;margin-right:.28em;}
+  @keyframes wordUp{to{opacity:1;transform:translateY(0);}}
+
+  /* barrido de luz en botones */
+  .btn-fill, .btn{position:relative;overflow:hidden;}
+  .btn-fill::before, .btn::before{
+    content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;
+    background:linear-gradient(120deg, transparent, rgba(255,255,255,.35), transparent);
+    transform:skewX(-20deg);transition:left .6s ease;
+  }
+  .btn-fill:hover::before, .btn:hover::before{left:120%;}
+
+  /* tilt 3D en tarjetas */
+  .card{transform-style:preserve-3d;}
+
+  /* linea divisoria que se dibuja */
+  .divider{overflow:visible;}
+  .divider span{position:absolute;inset:0;background:linear-gradient(90deg,var(--rojo-vivo),var(--oro));transform-origin:left;animation:drawLine 1.2s ease forwards;}
+  @keyframes drawLine{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+
+  /* h2 shimmer en em */
+  h2 em{
+    background:linear-gradient(90deg, var(--oro-claro) 0%, #fff6df 25%, var(--oro-claro) 50%);
+    background-size:200% auto;
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:shimmer 3.5s linear infinite;
+  }
+  @keyframes shimmer{to{background-position:-200% center;}}
+
+  /* faq icono girando suave */
+  .faq-item h3::before{content:"✦";color:var(--rojo-vivo);margin-right:8px;display:inline-block;animation:spinSlow 6s linear infinite;}
+  @keyframes spinSlow{to{transform:rotate(360deg);}}
+
+  /* logo brillo */
+  .logo span{position:relative;}
+  .logo{animation:logoGlow 4s ease infinite;}
+  @keyframes logoGlow{0%,100%{text-shadow:0 0 0 transparent;}50%{text-shadow:0 0 12px rgba(198,161,91,.5);}}
+  h2{text-align:center;font-size:2.3rem;font-weight:400;color:var(--hueso);}
+  h2 em{color:var(--oro-claro);font-style:italic;}
+  .lead{text-align:center;max-width:600px;margin:16px auto 50px;color:#bdae98;font-size:1rem;line-height:1.6;}
+
+  /* MATERIALES con imagenes */
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:1150px;margin:0 auto;}
+  .card{border:1px solid rgba(198,161,91,.35);background:#000;overflow:hidden;transition:.4s;}
+  .card:hover{border-color:var(--rojo-vivo);transform:translateY(-6px);box-shadow:0 12px 30px rgba(110,19,25,.35);}
+  .card img{width:100%;height:190px;object-fit:cover;display:block;filter:grayscale(15%) brightness(.85);transition:transform .6s ease, filter .6s ease;}
+  .card:hover img{transform:scale(1.08);filter:grayscale(0%) brightness(.95);}
+  .card-body{padding:22px 20px;}
+  .card h3{color:var(--oro-claro);font-weight:400;font-size:1.2rem;margin-bottom:10px;letter-spacing:.5px;}
+  .card p{color:#b7a68f;font-size:.92rem;line-height:1.6;}
+
+  /* GALERÍA horizontal panorámica */
+  .gallery{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:3px;padding:3px 0;background:linear-gradient(90deg,var(--rojo-vivo),var(--oro),var(--rojo-vivo));}
+  .gallery a{overflow:hidden;display:block;}
+  .gallery img{width:100%;height:380px;object-fit:cover;display:block;filter:brightness(.88);transition:transform .7s ease, filter .7s ease;}
+  .gallery a:hover img{transform:scale(1.06);filter:brightness(1) sepia(.08);}
+
+  /* LUTHERIA banner */
+  .banner{
+    position:relative;min-height:56vh;display:flex;align-items:center;
+    background:
+      linear-gradient(100deg, rgba(5,4,3,.95) 32%, rgba(74,13,17,.4)),
+      url('https://images.unsplash.com/photo-1649088547358-aaf4696d747e?fm=jpg&q=80&w=2200&auto=format&fit=crop') center/cover;
+    padding:0 60px;
+    overflow:hidden;
+  }
+  .banner-inner{position:relative;z-index:2;opacity:0;animation:fadeUp .9s ease .1s forwards;}
+  .banner-inner{max-width:520px;}
+  .banner h2{text-align:left;}
+  .banner .lead{text-align:left;margin-left:0;}
+  .list{margin-top:18px;color:#cdbca3;line-height:2;font-size:1rem;}
+  .list li{list-style:none;padding-left:22px;position:relative;}
+  .list li::before{content:"✦";position:absolute;left:0;color:var(--oro);}
+
+  /* GEMAS con imagen real */
+  .gems{display:flex;gap:50px;max-width:1000px;margin:0 auto;align-items:center;justify-content:center;flex-wrap:wrap;}
+  .gem-note{max-width:440px;color:#bdae98;line-height:1.7;}
+  .gem-note strong{color:var(--oro-claro);}
+  .gem-photo{width:280px;height:280px;position:relative;border:1px solid var(--oro);animation:glowPulse 3.2s ease infinite;}
+  .gem-photo img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;}
+  .gem-photo:hover img{transform:scale(1.07);}
+  .gem-photo::before,.gem-photo::after{content:"";position:absolute;width:18px;height:18px;border:2px solid var(--oro);}
+  .gem-photo::before{top:-2px;left:-2px;border-right:none;border-bottom:none;}
+  .gem-photo::after{bottom:-2px;right:-2px;border-left:none;border-top:none;}
+
+  /* FAQ */
+  .faq{max-width:780px;margin:0 auto;}
+  .faq-item{border-bottom:1px solid rgba(198,161,91,.3);padding:20px 0;}
+  .faq-item h3{color:var(--oro-claro);font-weight:400;font-size:1.1rem;margin-bottom:8px;}
+  .faq-item p{color:#b7a68f;font-size:.92rem;line-height:1.6;}
+
+  footer{text-align:center;padding:44px 20px 26px;border-top:1px solid rgba(198,161,91,.5);border-image:linear-gradient(90deg,transparent,var(--rojo-vivo),var(--oro),var(--rojo-vivo),transparent) 1;color:#8a7a63;font-size:.88rem;letter-spacing:1px;background:#000;}
+
+  .fade-section{opacity:0;transform:translateY(30px);transition:opacity .9s ease, transform .9s ease;}
+  .fade-section.in-view{opacity:1;transform:translateY(0);}
+
+  @media(max-width:900px){
+    .hero h1{font-size:2.6rem;}
+    .grid3,.gallery{grid-template-columns:1fr;}
+    header{padding:18px 24px;}
+    section{padding:60px 24px;}
+    .hero{padding:24px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<header>
+  <div class="logo">ATELIER DI <span>CORDE</span></div>
+  <nav>
+    <a href="#materiales">Materiales</a>
+    <a href="#lutheria">Lutería</a>
+    <a href="#gemas">Incrustaciones</a>
+    <a href="#faq">Preguntas</a>
+  </nav>
+  <a class="btn" href="#contacto">Consulta privada</a>
+</header>
+
+<section class="hero" style="padding-top:0;">
+  <div class="particles"></div>
+  <div class="hero-content">
+    <div class="eyebrow">Arce · Ébano · Sin plástico, sin excepciones</div>
+    <h1>
+      <span class="word" style="animation-delay:.1s">Un</span>
+      <span class="word" style="animation-delay:.2s">violín</span>
+      <span class="word" style="animation-delay:.3s">tallado</span><br>
+      <span class="word" style="animation-delay:.4s">para</span>
+      <em class="word" style="animation-delay:.5s">toda</em>
+      <span class="word" style="animation-delay:.6s">una</span>
+      <span class="word" style="animation-delay:.7s">vida</span>
+      <span class="word" style="animation-delay:.8s">musical</span>
+    </h1>
+    <p>Del primer estudiante al solista de concierto: cada instrumento se construye en madera maciza de arce y ébano, con la misma exigencia sonora sin importar el nivel del músico.</p>
+    <div class="hero-cta">
+      <a class="btn-fill" href="#materiales">Descubre el instrumento</a>
+      <a class="btn" href="#lutheria">Servicio de lutería</a>
+    </div>
+  </div>
+</section>
+
+<section id="materiales" class="fade-section">
+  <div class="divider"><span></span></div>
+  <h2>Hecho enteramente en <em>madera</em></h2>
+  <p class="lead">La tapa en abeto o arce y el diapasón en ébano son innegociables. Solo se incorporan los materiales tradicionales que un violín de verdad requiere para sonar y durar.</p>
+  <div class="grid3">
+    <div class="card reveal d1">
+      <img src="https://images.unsplash.com/photo-1692552950398-63feb911b8e2?fm=jpg&q=80&w=900&auto=format&fit=crop" alt="Violín de arce">
+      <div class="card-body">
+        <h3>Arce & Ébano</h3>
+        <p>Fondo, aros y clavijero en arce flameado; diapasón, clavijas y cordal en ébano macizo. Nunca fibra ni plástico.</p>
+      </div>
+    </div>
+    <div class="card reveal d2">
+      <img src="https://images.unsplash.com/photo-1649088547358-aaf4696d747e?fm=jpg&q=80&w=900&auto=format&fit=crop" alt="Violín sobre fondo negro">
+      <div class="card-body">
+        <h3>Cuerdas & Hilo</h3>
+        <p>Cuerdas de acero, entorchadas o de tripa de tendón animal según el modelo, con hilo de seda en el amarre.</p>
+      </div>
+    </div>
+    <div class="card reveal d3">
+      <img src="https://images.unsplash.com/photo-1585263547501-7e5a0c222010?fm=jpg&q=80&w=900&auto=format&fit=crop" alt="Detalle de violín">
+      <div class="card-body">
+        <h3>Metales & Teflón</h3>
+        <p>Herrajes en filete de metal y teflón en los puntos de fricción del mecanismo, sin desgastar la madera.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gallery">
+  <a href="#materiales"><img src="https://images.unsplash.com/photo-1649088547358-aaf4696d747e?fm=jpg&q=80&w=1600&auto=format&fit=crop" alt="Violín negro"></a>
+  <a href="#materiales"><img src="https://images.unsplash.com/photo-1692552950398-63feb911b8e2?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="Violín tocado"></a>
+  <a href="#materiales"><img src="https://images.unsplash.com/photo-1585263547501-7e5a0c222010?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="Detalle violín"></a>
+</div>
+
+<section class="banner fade-section" id="lutheria">
+  <div class="banner-inner">
+    <div class="eyebrow">Lutería</div>
+    <h2>El arte de <em>reparar</em> un violín</h2>
+    <p class="lead">Restauramos y ajustamos instrumentos con las mismas técnicas y maderas con que se construyen.</p>
+    <ul class="list">
+      <li>Reparación de grietas y aberturas en la tapa</li>
+      <li>Ajuste de alma, puente y afinador</li>
+      <li>Restauración de barniz original</li>
+      <li>Sustitución de cuerdas, clavijas y cordal</li>
+    </ul>
+  </div>
+</section>
+
+<section id="gemas" class="fade-section">
+  <div class="divider"><span></span></div>
+  <h2>Incrustaciones de <em>nácar y piedra preciosa</em></h2>
+  <div class="gems">
+    <div class="gem-photo"><img src="https://images.unsplash.com/photo-1676496219942-e52c419f4868?fm=jpg&q=80&w=800&auto=format&fit=crop" alt="Piedra preciosa engastada en oro"></div>
+    <div class="gem-note">
+      <p>El material tradicional para la decoración ornamental de un violín es el <strong>nácar</strong> y la <strong>concha de abulón</strong>, incrustados junto a filetes de maderas finas en el clavijero y los bordes del instrumento.</p>
+      <p style="margin-top:14px;">Para quien busque algo aún más exclusivo, también engastamos <strong>piedras preciosas</strong> —ónix, granate, zafiro— montadas a mano, sin comprometer el peso ni la vibración de la madera.</p>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="fade-section">
+  <div class="divider"><span></span></div>
+  <h2>Preguntas <em>frecuentes</em></h2>
+  <div class="faq">
+    <div class="faq-item">
+      <h3>¿Sirve para principiantes?</h3>
+      <p>Sí. Ofrecemos modelos de estudio con la misma madera maciza que los de concierto; cambia el acabado, no la calidad del sonido.</p>
+    </div>
+    <div class="faq-item">
+      <h3>¿Qué es la lutería?</h3>
+      <p>Es el oficio de construir y reparar instrumentos de cuerda a mano, cuidando cada pieza de madera como parte del sonido final.</p>
+    </div>
+    <div class="faq-item">
+      <h3>¿Puedo pedir cuerda de tripa?</h3>
+      <p>Sí, para modelos históricos o de cuerda barroca montamos cuerdas de tripa de tendón animal bajo pedido.</p>
+    </div>
+    <div class="faq-item">
+      <h3>¿Las piedras preciosas afectan el sonido?</h3>
+      <p>No; se engastan en zonas no vibrantes del instrumento, como el clavijero, para preservar la acústica.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contacto">
+  ATELIER DI CORDE — Lutería y violines de autor · Madera maciza, siempre.
+</footer>
+
+<script>
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
+  }, {threshold:.15});
+  document.querySelectorAll('.fade-section').forEach(el=>io.observe(el));
+
+  // barra de progreso de scroll
+  window.addEventListener('scroll', ()=>{
+    const h = document.documentElement;
+    const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+  });
+
+  // particulas doradas flotantes en el hero
+  const box = document.querySelector('.particles');
+  if(box){
+    for(let i=0;i<22;i++){
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random()*100 + '%';
+      p.style.animationDuration = (6 + Math.random()*8) + 's';
+      p.style.animationDelay = (Math.random()*8) + 's';
+      p.style.width = p.style.height = (2 + Math.random()*3) + 'px';
+      box.appendChild(p);
+    }
+  }
+</script>
+</body>
+</html>
