@@ -216,9 +216,77 @@
   .fade-section{opacity:0;transform:translateY(30px);transition:opacity .9s ease, transform .9s ease;}
   .fade-section.in-view{opacity:1;transform:translateY(0);}
 
+  /* TABS SELECTOR */
+  .tabs-selector{display:flex;gap:12px;justify-content:center;margin-bottom:48px;flex-wrap:wrap;}
+  .tab-btn{background:transparent;border:2px solid rgba(198,161,91,.3);color:var(--hueso);padding:10px 18px;font-size:.95rem;letter-spacing:1px;cursor:pointer;transition:.4s;font-family:inherit;text-transform:uppercase;}
+  .tab-btn:hover{border-color:var(--oro);color:var(--oro-claro);}
+  .tab-btn.active{background:linear-gradient(135deg, var(--rojo), var(--rojo-vivo));border-color:var(--oro);color:var(--hueso);}
+
+  /* TAB CONTENT */
+  .tab-content{display:none;animation:fadeIn .6s ease;}
+  .tab-content.active{display:block;}
+  @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+
+  /* EVENTOS GRID */
+  .eventos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto;}
+  .evento{background:rgba(198,161,91,.05);border:1px solid rgba(198,161,91,.25);padding:0;overflow:hidden;transition:.4s;position:relative;}
+  .evento::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg, var(--rojo-vivo), var(--oro), var(--rojo-vivo));opacity:0;transition:.4s;}
+  .evento:hover{border-color:var(--oro);box-shadow:0 12px 35px rgba(110,19,25,.25);}
+  .evento:hover::before{opacity:1;}
+  .evento-header{padding:28px 24px 20px;border-bottom:1px solid rgba(198,161,91,.15);}
+  .evento-fecha{display:flex;gap:12px;margin-bottom:16px;align-items:center;}
+  .dia{font-size:2.2rem;font-weight:400;color:var(--oro-claro);line-height:1;}
+  .mes{font-size:.75rem;letter-spacing:2px;color:var(--oro);text-transform:uppercase;line-height:1.4;}
+  .evento h3{font-size:1.15rem;color:var(--hueso);font-weight:400;margin-bottom:6px;}
+  .locacion{font-size:.92rem;color:#a89875;margin:0;font-style:italic;}
+  .evento-body{padding:18px 24px 22px;}
+  .evento-body p{font-size:.9rem;line-height:1.5;color:#baa68f;margin-bottom:10px;}
+  .evento-body p strong{color:var(--hueso);}
+
+  /* SOLISTAS */
+  .solistas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1200px;margin:0 auto;}
+  .solista-card{background:rgba(198,161,91,.08);border:1px solid rgba(198,161,91,.25);overflow:hidden;transition:.4s;}
+  .solista-card:hover{border-color:var(--oro-claro);box-shadow:0 16px 40px rgba(110,19,25,.3);}
+  .solista-banner{background:linear-gradient(135deg, rgba(110,19,25,.4), rgba(198,161,91,.2));padding:40px 20px;text-align:center;position:relative;overflow:hidden;}
+  .solista-banner::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(5,4,3,.6));}
+  .solista-icon{font-size:4rem;position:relative;z-index:2;}
+  .solista-info{padding:24px 20px;}
+  .solista-card h3{font-size:1.3rem;color:var(--hueso);margin-bottom:4px;font-weight:400;}
+  .rol{font-size:.85rem;color:var(--oro);text-transform:uppercase;letter-spacing:1px;margin:0 0 12px;}
+  .desc{font-size:.92rem;color:#baa68f;line-height:1.5;margin-bottom:16px;}
+  .evento-mini{background:rgba(198,161,91,.1);padding:12px;border-left:2px solid var(--rojo-vivo);font-size:.9rem;color:#cdbca3;line-height:1.6;margin-bottom:14px;}
+  .evento-mini strong{color:var(--oro-claro);}
+  .evento-mini em{color:#a89875;font-style:italic;}
+
+  /* TIPS */
+  .tips-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1200px;margin:0 auto;}
+  .tip-card{background:rgba(198,161,91,.06);border:1px solid rgba(198,161,91,.2);padding:24px;transition:.4s;position:relative;overflow:hidden;}
+  .tip-card::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;background:var(--rojo-vivo);opacity:0;transition:.4s;}
+  .tip-card:hover{border-color:var(--oro);box-shadow:0 12px 30px rgba(110,19,25,.2);}
+  .tip-card:hover::before{opacity:1;}
+  .tip-header{display:flex;gap:16px;align-items:flex-start;margin-bottom:16px;}
+  .tip-icon{font-size:2.2rem;line-height:1;}
+  .tip-card h3{font-size:1.1rem;color:var(--hueso);font-weight:400;margin:0;}
+  .tip-body p{font-size:.92rem;color:#baa68f;line-height:1.6;margin:0;}
+
+  /* NOTICIAS */
+  .noticias-list{max-width:900px;margin:0 auto;}
+  .noticia{background:rgba(198,161,91,.06);border-left:3px solid var(--rojo-vivo);padding:26px 28px;margin-bottom:20px;transition:.4s;}
+  .noticia:hover{background:rgba(198,161,91,.12);border-left-color:var(--oro-claro);}
+  .noticia-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:16px;}
+  .noticia-fecha{font-size:.85rem;color:var(--oro);text-transform:uppercase;letter-spacing:.5px;}
+  .noticia-tag{display:inline-block;background:rgba(110,19,25,.4);color:var(--oro-claro);padding:4px 12px;border-radius:3px;font-size:.8rem;text-transform:uppercase;letter-spacing:.5px;}
+  .noticia h3{font-size:1.25rem;color:var(--hueso);margin-bottom:12px;font-weight:400;line-height:1.4;}
+  .noticia p{font-size:.95rem;color:#cdbca3;line-height:1.6;margin-bottom:14px;}
+
+  .link-evento{display:inline-block;color:var(--oro);font-size:.85rem;letter-spacing:.5px;text-transform:uppercase;padding-bottom:2px;border-bottom:1px solid var(--oro);transition:.3s;}
+  .link-evento:hover{color:var(--oro-claro);border-bottom-color:var(--oro-claro);}
+
   @media(max-width:900px){
     .hero h1{font-size:2.6rem;}
-    .grid3,.gallery{grid-template-columns:1fr;}
+    .grid3,.gallery,.eventos-grid,.solistas-grid,.tips-grid{grid-template-columns:1fr;}
+    .tabs-selector{gap:8px;}
+    .tab-btn{padding:8px 12px;font-size:.85rem;}
     header{padding:18px 24px;}
     section{padding:60px 24px;}
     .hero{padding:24px;}
@@ -235,6 +303,7 @@
     <a href="#materiales">Materiales</a>
     <a href="#lutheria">Lutería</a>
     <a href="#gemas">Incrustaciones</a>
+    <a href="#eventos">Conciertos</a>
     <a href="#faq">Preguntas</a>
   </nav>
   <a class="btn" href="#contacto">Consulta privada</a>
@@ -346,11 +415,260 @@
   </div>
 </section>
 
+<section id="eventos" class="fade-section">
+  <div class="divider"><span></span></div>
+  <h2>Actualidades & <em>Conciertos</em></h2>
+  <p class="lead">Lo último en el mundo de la música de cuerda, conciertos de nuestros artistas y consejos para cuidar tu violín.</p>
+  
+  <!-- TAB SELECTOR -->
+  <div class="tabs-selector">
+    <button class="tab-btn active" data-tab="conciertos">🎻 Conciertos</button>
+    <button class="tab-btn" data-tab="solistas">⭐ Solistas</button>
+    <button class="tab-btn" data-tab="tips">🛠️ Tips de Cuidado</button>
+    <button class="tab-btn" data-tab="noticias">📰 Noticias</button>
+  </div>
+
+  <!-- TAB 1: CONCIERTOS -->
+  <div class="tab-content active" id="conciertos">
+    <div class="eventos-grid">
+      <div class="evento reveal d1">
+        <div class="evento-header">
+          <div class="evento-fecha">
+            <div class="dia">16</div>
+            <div class="mes">SEP</div>
+          </div>
+          <h3>Orquesta Sinfónica de Bogotá</h3>
+          <p class="locacion">🏛️ Bogotá, Cundinamarca</p>
+        </div>
+        <div class="evento-body">
+          <p><strong>Director:</strong> maestro Andrés Orozco Estrada</p>
+          <p><strong>Programa:</strong> Conciertos para violín de Bach, Mendelssohn</p>
+          <a href="#" class="link-evento">Entradas e información →</a>
+        </div>
+      </div>
+
+      <div class="evento reveal d2">
+        <div class="evento-header">
+          <div class="evento-fecha">
+            <div class="dia">20</div>
+            <div class="mes">SEP</div>
+          </div>
+          <h3>Sinfónica del Cauca</h3>
+          <p class="locacion">🎵 Popayán, Cauca</p>
+        </div>
+        <div class="evento-body">
+          <p><strong>Director:</strong> maestro Carlos Giménez</p>
+          <p><strong>Programa:</strong> Clásicos y estrenos latinoamericanos</p>
+          <a href="#" class="link-evento">Entradas e información →</a>
+        </div>
+      </div>
+
+      <div class="evento reveal d3">
+        <div class="evento-header">
+          <div class="evento-fecha">
+            <div class="dia">24</div>
+            <div class="mes">SEP</div>
+          </div>
+          <h3>Festival de Violín en Vivo</h3>
+          <p class="locacion">🎼 Cali, Valle del Cauca</p>
+        </div>
+        <div class="evento-body">
+          <p><strong>Evento:</strong> exhibición de luthería y masterclass</p>
+          <p><strong>Participantes:</strong> violinistas internacionales</p>
+          <a href="#" class="link-evento">Entradas e información →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: SOLISTAS DESTACADOS -->
+  <div class="tab-content" id="solistas">
+    <div class="solistas-grid">
+      <div class="solista-card reveal d1">
+        <div class="solista-banner">
+          <div class="solista-icon">🎻</div>
+        </div>
+        <div class="solista-info">
+          <h3>Isabelle Faust</h3>
+          <p class="rol">Violinista alemana</p>
+          <p class="desc">Especialista en Bach y música contemporánea. Toca un Stradivarius de 1704.</p>
+          <div class="evento-mini">
+            <strong>Próximo:</strong> 16 de septiembre — Bogotá<br>
+            <em>Concierto Bach completo</em>
+          </div>
+          <a href="#" class="link-evento">Ver más →</a>
+        </div>
+      </div>
+
+      <div class="solista-card reveal d2">
+        <div class="solista-banner">
+          <div class="solista-icon">🌟</div>
+        </div>
+        <div class="solista-info">
+          <h3>James Ehnes</h3>
+          <p class="rol">Violinista canadiense</p>
+          <p class="desc">Ganador del Grammy. Répertorio clásico y contemporáneo. Violín de 1760.</p>
+          <div class="evento-mini">
+            <strong>Próximo:</strong> 20 de septiembre — Popayán<br>
+            <em>Sibelius y Shostakovich</em>
+          </div>
+          <a href="#" class="link-evento">Ver más →</a>
+        </div>
+      </div>
+
+      <div class="solista-card reveal d3">
+        <div class="solista-banner">
+          <div class="solista-icon">✨</div>
+        </div>
+        <div class="solista-info">
+          <h3>Akiko Suwanai</h3>
+          <p class="rol">Violinista japonesa</p>
+          <p class="desc">Virtuosa internacional. Técnica impecable y repertorio versátil. Violín Guarneri.</p>
+          <div class="evento-mini">
+            <strong>Próximo:</strong> 24 de septiembre — Cali<br>
+            <em>Masterclass exclusiva</em>
+          </div>
+          <a href="#" class="link-evento">Ver más →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: TIPS DE CUIDADO -->
+  <div class="tab-content" id="tips">
+    <div class="tips-grid">
+      <div class="tip-card reveal d1">
+        <div class="tip-header">
+          <div class="tip-icon">🧹</div>
+          <h3>Limpieza básica después de tocar</h3>
+        </div>
+        <div class="tip-body">
+          <p>Usa un paño suave y seco para limpiar las cuerdas y el cuerpo del violín. Elimina los residuos de resina después de cada sesión. Nunca uses agua ni productos químicos.</p>
+        </div>
+      </div>
+
+      <div class="tip-card reveal d2">
+        <div class="tip-header">
+          <div class="tip-icon">💧</div>
+          <h3>Humedad y temperatura</h3>
+        </div>
+        <div class="tip-body">
+          <p>Mantén tu violín en un ambiente entre 40-60% de humedad relativa. Cambios drásticos pueden dañar la madera. Guarda siempre en estuche protector alejado de fuentes de calor directo.</p>
+        </div>
+      </div>
+
+      <div class="tip-card reveal d3">
+        <div class="tip-header">
+          <div class="tip-icon">🎻</div>
+          <h3>Cambio de cuerdas</h3>
+        </div>
+        <div class="tip-body">
+          <p>Cambia las cuerdas cada 1-2 años si tocas regularmente. Cada cuerda debe reemplazarse individualmente por un lutier profesional para mantener la acústica.</p>
+        </div>
+      </div>
+
+      <div class="tip-card reveal d1">
+        <div class="tip-header">
+          <div class="tip-icon">🏹</div>
+          <h3>Cuidado del arco</h3>
+        </div>
+        <div class="tip-body">
+          <p>Afloja las cerdas después de tocar. Limpialas con un paño suave. Cada 2-3 años recibe mantenimiento profesional. Evita tocar las cerdas con los dedos.</p>
+        </div>
+      </div>
+
+      <div class="tip-card reveal d2">
+        <div class="tip-header">
+          <div class="tip-icon">🔍</div>
+          <h3>Revisión periódica</h3>
+        </div>
+        <div class="tip-body">
+          <p>Lleva tu violín a revisión anual con un lutier. Detecta grietas, desgaste del barniz o problemas de afinación temprano. Prevención es más barato que reparación.</p>
+        </div>
+      </div>
+
+      <div class="tip-card reveal d3">
+        <div class="tip-header">
+          <div class="tip-icon">🎵</div>
+          <h3>Almacenamiento correcto</h3>
+        </div>
+        <div class="tip-body">
+          <p>Guarda el violín en posición vertical dentro del estuche. Usa protectores de espuma. Nunca lo dejes en autos calientes ni expuesto a luz solar directa.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 4: NOTICIAS -->
+  <div class="tab-content" id="noticias">
+    <div class="noticias-list">
+      <article class="noticia reveal d1">
+        <div class="noticia-header">
+          <span class="noticia-fecha">15 de septiembre, 2024</span>
+          <span class="noticia-tag">Luthería</span>
+        </div>
+        <h3>Nueva técnica de barnizado: combinación de gomas naturales</h3>
+        <p>Los maestros de Atelier di Corde han perfeccionado un proceso de barnizado que combina ámbar, goma laca y aceites naturales, elevando la resonancia de los violines hasta un 15% más que métodos convencionales.</p>
+        <a href="#" class="link-evento">Leer más →</a>
+      </article>
+
+      <article class="noticia reveal d2">
+        <div class="noticia-header">
+          <span class="noticia-fecha">12 de septiembre, 2024</span>
+          <span class="noticia-tag">Conciertos</span>
+        </div>
+        <h3>Isabelle Faust ganadora del "Violinist of the Year"</h3>
+        <p>La reconocida violinista ha sido galardonada nuevamente por su interpretación del ciclo completo de Bach. Este año tocará exclusivamente violines de Atelier di Corde en su gira sudamericana.</p>
+        <a href="#" class="link-evento">Leer más →</a>
+      </article>
+
+      <article class="noticia reveal d3">
+        <div class="noticia-header">
+          <span class="noticia-fecha">8 de septiembre, 2024</span>
+          <span class="noticia-tag">Eventos</span>
+        </div>
+        <h3>Festival de Violín 2024: inscripciones abiertas para masterclasses</h3>
+        <p>Se abrieron las inscripciones para las masterclasses con Akiko Suwanai y James Ehnes en Cali. Límite: 30 estudiantes por sesión. Cupos disponibles hasta el 20 de septiembre.</p>
+        <a href="#" class="link-evento">Leer más →</a>
+      </article>
+
+      <article class="noticia reveal d1">
+        <div class="noticia-header">
+          <span class="noticia-fecha">5 de septiembre, 2024</span>
+          <span class="noticia-tag">Restauración</span>
+        </div>
+        <h3>Restaurado violín Stradivarius de 1700 en nuestros talleres</h3>
+        <p>Un instrumento legendario del s. XVIII fue completamente restaurado respetando técnicas originales. El trabajo incluyó reparación de grietas, nuevo barniz y ajuste total del alma y puente.</p>
+        <a href="#" class="link-evento">Leer más →</a>
+      </article>
+    </div>
+  </div>
+
+</section>
+
 <footer id="contacto">
   ATELIER DI CORDE — Lutería y violines de autor · Madera maciza, siempre.
 </footer>
 
 <script>
+  // TABS FUNCTIONALITY
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabName = btn.getAttribute('data-tab');
+      
+      // Desactivar todos los tabs
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
+      
+      // Activar el tab seleccionado
+      btn.classList.add('active');
+      document.getElementById(tabName).classList.add('active');
+    });
+  });
+
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
   }, {threshold:.15});
